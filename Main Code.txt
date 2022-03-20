@@ -1,0 +1,61 @@
+int ForwordSignal=A1;
+int BackwordSignal=A4;
+int LEDs=3;
+int ForwordMotor=4;
+int BackwordMotor=12;
+int code1;
+int cod2;
+int FM=0;
+int BM=0;
+int state=0;
+int testRelay=8;
+
+
+
+void setup() {
+ 
+      Serial.begin(9600);
+      pinMode(ForwordSignal,INPUT);
+      pinMode(BackwordSignal,INPUT);
+      pinMode(ForwordMotor,OUTPUT);
+      pinMode(BackwordMotor,OUTPUT);
+      pinMode(LEDs,OUTPUT);
+      pinMode(testRelay,OUTPUT);
+
+
+}
+
+void loop() {
+     FM=analogRead(ForwordSignal);
+     BM=analogRead(BackwordSignal);
+
+     Serial.println("B");
+     Serial.println("----");
+     Serial.println("F");
+
+     if(FM>200) //  3.3volts ---675 bit
+     {
+      digitalWrite(ForwordMotor,HIGH);// LOW to start the relay 
+      digitalWrite(BackwordMotor,LOW); // HIGH to stop the relay 
+      digitalWrite(testRelay,LOW);
+      
+      state=1;
+                   Serial.print("FM is");
+                   Serial.println(FM);
+
+     }else if(BM>200)
+      {
+        digitalWrite(BackwordMotor,HIGH);//very good
+        digitalWrite(ForwordMotor,LOW);
+        ; // HIGH to stop the relay 
+
+                Serial.print("BM is");
+                Serial.println(BM);
+
+        state=2;
+      }else{digitalWrite(ForwordMotor,HIGH);
+        digitalWrite(BackwordMotor,HIGH);
+        digitalWrite(testRelay,HIGH); // HIGH to stop the relay 
+
+      };
+     
