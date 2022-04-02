@@ -1,5 +1,5 @@
-#include<Servo.h>
-#include <Wire.h>
+#include<Servo.h>    // use of the servo library
+#include <Wire.h>     //used to communicate the I2C devices .
 
 
 float temp;
